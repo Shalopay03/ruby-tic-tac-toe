@@ -15,6 +15,18 @@ class Game
       %w[9 8 7]
     ]
   end
+
+  def play
+    show_field
+  end
+
+  def show_field
+    puts @field[0][0] + ' | ' + @field[0][1] + ' | ' + @field[0][2]
+    puts '---------'
+    puts @field[1][0] + ' | ' + @field[1][1] + ' | ' + @field[1][2]
+    puts '---------'
+    puts @field[2][0] + ' | ' + @field[2][1] + ' | ' + @field[2][2]
+  end
 end
 
 def initialize_player
@@ -27,6 +39,8 @@ end
 
 puts 'First player initialization:'
 player_one = initialize_player
+puts 'Second player initialization:'
+player_one = initialize_player
 
-puts player_one.name
-puts player_one.symbol
+game = Game.new
+game.play
