@@ -13,9 +13,23 @@ class Game
   end
 
   # playing game method
-  def play(player_one, _player_two)
-    play_round(player_one)
-    show_field
+  def play(player_one, player_two)
+    rounds_played = 0
+    loop do
+      play_round(player_one)
+      show_field
+      return player_one.name if won?(player_one)
+
+      rounds_played += 1
+
+      return 'friendship' if rounds_played == 9
+
+      play_round(player_two)
+      show_field
+      return player_two.name if won?(player_two)
+
+      rounds_played += 1
+    end
   end
 
   # outputs game field
@@ -37,6 +51,35 @@ class Game
     end
     @field[@field.find_index(choice)] = player.symbol
   end
+
+  # checks wheter someone won
+  def won?(player)
+    # check vertically
+    for i in 0..2 do
+      return true if @field[i] == player.symbol and
+                     @field[i + 3] == player.symbol and
+                     @field[i + 6] == player.symbol
+    end
+    # check horizontally
+    for i in [0, 3, 6] do
+      return true if @field[i] == player.symbol and
+                     @field[i + 1] == player.symbol and
+                     @field[i + 2] == player.symbol
+    end
+    # check top-left to bottom-right
+    return true if @field[0] == player.symbol and
+                   @field[4] == player.symbol and
+                   @field[8] == player.symbol
+
+    # check top-right to lower-left
+    for i in [0, 4, 8] do
+      return true if @field[2] == player.symbol and
+                     @field[4] == player.symbol and
+                     @field[6] == player.symbol
+    end
+
+    false
+  end
 end
 
 def initialize_player(symbol)
@@ -52,4 +95,5 @@ player_two = initialize_player('o')
 
 game = Game.new
 game.show_field
-game.play(player_one, player_two)
+winner_name = game.play(player_one, player_two)
+puts "Hurray, #{winner_name} won!!!"
