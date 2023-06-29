@@ -2,6 +2,7 @@
 
 require_relative 'player'
 
+# class that contains game methods
 class Game
   def initialize
     @field = %w[1 2 3 4 5 6 7 8 9]
