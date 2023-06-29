@@ -1,3 +1,8 @@
+# frozen_string_literal: true
+
+require_relative 'game'
+require_relative 'player'
+
 def initialize_player(symbol)
   puts 'Enter player name: '
   name = gets.chop
