@@ -42,10 +42,15 @@ class Game
     choice = nil
     loop do
       puts "#{player.name}, choose the avaible cell between 1 and 9:"
-      choice = gets.chr
+      choice = player_cell_input
       break if @field.include?(choice) && (choice != 'x') && (choice != 'o')
     end
     @field[@field.find_index(choice)] = player.symbol
+  end
+
+  # gets player input for cell
+  def player_cell_input
+    gets.chr
   end
 
   # checks wheter someone won
